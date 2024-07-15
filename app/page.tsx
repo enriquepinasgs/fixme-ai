@@ -1,40 +1,18 @@
 import FixedTextViewer from "@/components/fixed-text-viewer";
+import Navbar from "@/components/navbar";
+import TextInput from "@/components/text-input";
 import Tittle from "@/components/title";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { SparklesIcon } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main className="relative flex flex-col space-y-24 h-screen overflow-hidden">
       <Tittle classname="mt-24" />
-      <div className="grid grid-cols-2 h-full w-full">
-        <div className="p-12 items-center justify-center flex h-full">
-          <div className="flex flex-col w-full gap-1.5 max-w-md">
-            <Label htmlFor="input-text">Your Text</Label>
-            <Textarea
-              placeholder="Type or paste your text here to get suggestions."
-              className="h-56 max-h-64"
-              id="input-text"
-            />
-            <p className="text-sm text-muted-foreground">
-              The AI will analyze your text and suggest improvements.
-            </p>
-          </div>
-        </div>
-        <div className="flex h-full items-center justify-center max-w-2xl border rounded-md p-4 shadow-md">
-          <FixedTextViewer />
-        </div>
+      <div className="flex flex-col md:flex-row justify-evenly h-full w-full space-y-8 md:space-y-0">
+        <TextInput classname="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" />
+        <FixedTextViewer classname="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" />
       </div>
-      <HoverBorderGradient
-        containerClassName="rounded-full absolute top-1/2 right-1/2"
-        as="button"
-        className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
-      >
-        <span>FixMe</span>
-        <SparklesIcon className="text-amber-400" />
-      </HoverBorderGradient>
+
+      <Navbar />
     </main>
   );
 }

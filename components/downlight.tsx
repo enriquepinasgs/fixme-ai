@@ -10,7 +10,7 @@ export const Downlight = ({
   return (
     <span
       className={cn(
-        "font-bold bg-pink-100 text-pink-700 dark:bg-pink-700/[0.2] dark:text-pink-500 px-1 py-0.5",
+        "font-medium line-through bg-red-100 text-red-700 dark:bg-red-700/[0.2] dark:text-red-500 px-1 py-0.5",
         className
       )}
     >
