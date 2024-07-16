@@ -20,7 +20,7 @@ export default function Tittle({ classname }: { classname?: string }) {
     },
     {
       text: "FixMe.ai",
-      className: "text-primary",
+      className: "text-primary dark:text-primary",
     },
   ];
   return (

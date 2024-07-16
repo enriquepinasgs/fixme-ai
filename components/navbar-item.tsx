@@ -18,13 +18,16 @@ export default function NavbarItem({
     <button
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="relative flex space-x-2 items-center  px-4 py-1 rounded-full transition-all hover:bg-stone-100"
+      className={cn(
+        "relative flex gap-2 items-center  px-4 py-1 rounded-full transition-all",
+        hover ? "" : "text-foreground/80"
+      )}
     >
       <span>{name}</span>
       <Icon className={cn("h-4 w-4", iconClassName)} />
       {hover ? (
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-full bg-slate-100 rounded-md -z-50"
+          className="absolute left-0 right-0 h-full bg-stone-50 dark:bg-stone-800 rounded-full -z-50"
           layoutId="navbar"
           aria-hidden="true"
           transition={{

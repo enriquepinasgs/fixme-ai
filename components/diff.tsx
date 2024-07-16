@@ -2,8 +2,8 @@
 import * as diff from "diff";
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { Downlight } from "./downlight";
-import { Highlight } from "./highlight";
+import { Downlight } from "./ui/downlight";
+import { Highlight } from "./ui/highlight";
 
 const styles = {
   added: {

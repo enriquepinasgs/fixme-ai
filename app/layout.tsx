@@ -1,6 +1,8 @@
 import "@/app/globals.css";
 import { Inter as FontSans } from "next/font/google";
 
+import { ThemeProvider } from "@/components/theme-provider";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 import { cn } from "@/lib/utils";
 
 const fontSans = FontSans({
@@ -18,11 +20,19 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased overflow-hidden",
           fontSans.variable
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <BackgroundBeams />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -11,14 +11,13 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
   const [showErrors, setShowErrors] = useState(true);
   const { isCopied, copyToClipboard } = useCopyToClipboard();
   return (
-    <div className="flex flex-col space-y-4">
+    <div className={cn("flex flex-col space-y-4 h-full w-full", classname)}>
       <button
         onClick={() => {
           copyToClipboard("testing");
         }}
         className={cn(
-          "border rounded-md shadow-md px-6 py-4 overflow-auto max-h-96 group relative text-start",
-          classname
+          "border rounded-md shadow-md px-6 py-4 overflow-auto max-h-96 group relative text-start h-full w-full flex bg-background"
         )}
       >
         {isCopied ? (
@@ -38,7 +37,7 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
           id="airplane-mode"
           onClick={() => setShowErrors(!showErrors)}
         />
-        <Label htmlFor="airplane-mode">Show errors</Label>
+        <Label htmlFor="airplane-mode">Show suggestions</Label>
       </div>
     </div>
   );
