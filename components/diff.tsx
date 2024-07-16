@@ -5,22 +5,6 @@ import PropTypes from "prop-types";
 import { Downlight } from "./ui/downlight";
 import { Highlight } from "./ui/highlight";
 
-const styles = {
-  added: {
-    color: "green",
-    backgroundColor: "#a7f3d0",
-    padding: "0 2px 0 2px",
-    margin: "0 2px 0 2px",
-  },
-  removed: {
-    color: "red",
-    backgroundColor: "#fecdd3",
-    textDecoration: "line-through",
-    padding: "0 2px 0 2px",
-    margin: "0 2px 0 2px",
-  },
-};
-
 const Diff = ({ string1 = "", string2 = "", showErrors = true }) => {
   let groups = diff.diffWords(string1, string2);
 

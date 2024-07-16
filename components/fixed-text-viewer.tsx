@@ -4,6 +4,7 @@ import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/utils";
 import { CheckIcon, ClipboardIcon } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Label } from "./ui/label";
 import { Switch } from "./ui/switch";
 
@@ -15,6 +16,7 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
       <button
         onClick={() => {
           copyToClipboard("testing");
+          toast.success("text copied to clipboard");
         }}
         className={cn(
           "border rounded-md shadow-md px-6 py-4 overflow-auto max-h-96 group relative text-start h-full w-full flex bg-background"
@@ -26,8 +28,8 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
           <ClipboardIcon className="bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100" />
         )}
         <Diff
-          string1="En la tranquilidad del atardecer, el bosque parecía cobrar vida. Los árboles, altos y majestuosos, susurraban entre sí con el suave movimiento del viento. A lo lejos, el canto de los pájaros anunciaba la llegada de la noche, mientras el sol pintaba el cielo con tonos de naranja y púrpura. Caminando por un sendero estrecho, se podía sentir la conexión con la naturaleza en cada paso. Las hojas crujían bajo los pies, y el aire fresco traía consigo el aroma a tierra húmeda y a flores silvestres. Este lugar, escondido y apartado del bullicio de la ciudad, ofrecía un refugio de paz y serenidad. A medida que el sol descendía, las sombras se alargaban, creando un paisaje casi mágico. Los primeros destellos de las estrellas comenzaron a aparecer, y el cielo se transformó en un manto estrellado que invitaba a soñar. Aquí, en el corazón del bosque, uno podía redescubrir la belleza simple y pura del mundo natural. En este rincón del universo, el tiempo parecía detenerse. Era un recordatorio de la importancia de desconectar, de escuchar el silencio y de encontrar la paz en los pequeños detalles. En medio del bosque, rodeado de la grandiosidad de la naturaleza, uno podía sentirse verdaderamente libre y en armonía con el mundo."
-          string2="En la quietud del atardecer, el bosque parecía cobrar vida. Los árboles, altos y majestuosos, susurraban entre sí con el delicado movimiento del viento. A lo lejos, el canto de los pájaros anunciaba la llegada de la noche, mientras el sol coloreaba el cielo con tonos de naranja y púrpura. Caminando por un sendero estrecho, se podía sentir la conexión con la naturaleza en cada paso. Las hojas crujían bajo los pies, y el aire fresco traía consigo el aroma a tierra húmeda y flores silvestres. Este lugar, oculto y apartado del bullicio de la ciudad, ofrecía un refugio de paz y serenidad. A medida que el sol descendía, las sombras se alargaban, creando un paisaje casi etéreo. Los primeros destellos de las estrellas comenzaron a aparecer, y el cielo se transformó en un manto estrellado que invitaba a soñar. Aquí, en el corazón del bosque, uno podía redescubrir la belleza simple y pura del mundo natural. En este rincón del mundo, el tiempo parecía detenerse. Era un recordatorio de la importancia de desconectar, de escuchar el silencio y de encontrar la paz en los pequeños detalles. En medio del bosque, rodeado de la magnificencia de la naturaleza, uno podía sentirse verdaderamente libre y en armonía con el mundo."
+          string1="Welcome to FixMe.ai! This is a very usefull tool that will help you to improve your writings. To use it, simply write or paste your text in the box on the left and choose one of the options from the toolbar below. The 'FixMe' option will sugest corrections and improvements in your text. The 'Funny' option will change the tone of your text to make it more funny. And the 'Angry' option will change the tone to make it more angry. Try different options to see how your text changes!"
+          string2="Welcome to FixMe.ai! This is a very useful tool that will help you improve your writing. To use it, simply write or paste your text in the box on the left and choose one of the options from the toolbar below. The 'FixMe' option will suggest corrections and improvements to your text. The 'Funny' option will change the tone of your text to make it funnier. And the 'Angry' option will change the tone to make it angrier. Try different options to see how your text changes!"
           showErrors={showErrors}
         />
       </button>
