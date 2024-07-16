@@ -36,7 +36,7 @@ export default function Tittle({ classname }: { classname?: string }) {
           className="font-bold"
         >
           Vercel AI SDK
-        </LinkPreview>{" "}
+        </LinkPreview>
         . Enter your text and let FixMe.ai do the rest!
       </p>
     </div>
