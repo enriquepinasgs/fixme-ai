@@ -66,17 +66,14 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
           />
           <Label htmlFor="show-changes">Show changes</Label>
         </div>
-        <Tabs
-          value={diffMode}
-          onValueChange={setDiffMode}
-          defaultValue="words"
-          onChange={() => {
-            console.log("hola");
-          }}
-        >
+        <Tabs value={diffMode} onValueChange={setDiffMode} defaultValue="words">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="words">Words</TabsTrigger>
-            <TabsTrigger value="chars">Chars</TabsTrigger>
+            <TabsTrigger disabled={!showErrors} value="words">
+              Words
+            </TabsTrigger>
+            <TabsTrigger disabled={!showErrors} value="chars">
+              Chars
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
