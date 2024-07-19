@@ -23,13 +23,19 @@ export default function RequestSuggestion({
 }) {
   const [selectedMode, setSelectedMode] = useState<Mode | undefined>(undefined);
   const changeMode = useCallback(setSelectedMode, [setSelectedMode]);
-  const { originalText, setSuggestedText, setSentText } = useSuggestionStore(
-    (state) => ({
-      originalText: state.originalText,
-      setSuggestedText: state.setSuggestedText,
-      setSentText: state.setSentText,
-    })
-  );
+  const {
+    originalText,
+    setSuggestedText,
+    setSentText,
+    isLoading,
+    setIsLoading,
+  } = useSuggestionStore((state) => ({
+    originalText: state.originalText,
+    setSuggestedText: state.setSuggestedText,
+    setSentText: state.setSentText,
+    isLoading: state.isLoading,
+    setIsLoading: state.setIsLoading,
+  }));
   const { openApiKeyModal, currentApiKey } = useApiKeyStore((state) => ({
     openApiKeyModal: state.setModalIsOpen,
     currentApiKey: state.apiKey,
@@ -43,10 +49,12 @@ export default function RequestSuggestion({
     }
     const generatedPrompt = getPromptForMode(selectedMode.name, originalText);
     const openai = createOpenAI({ apiKey: currentApiKey });
+    setIsLoading(true);
     const suggestedText = await generateText({
       model: openai("gpt-4-turbo"),
       prompt: generatedPrompt,
     });
+    setIsLoading(false);
     setSuggestedText(suggestedText.text);
     setSentText(originalText);
   }
@@ -77,7 +85,9 @@ export default function RequestSuggestion({
         onClick={submit}
         className="gap-2"
         disabled={
-          originalText === undefined || originalText.trim().length === 0
+          originalText === undefined ||
+          originalText.trim().length === 0 ||
+          isLoading
         }
       >
         <span>Submit</span> <SparklesIcon className="w-4 h-4"></SparklesIcon>

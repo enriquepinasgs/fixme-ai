@@ -8,6 +8,8 @@ type SuggestionStore = {
   setSentText: (text: string | undefined) => void;
   suggestedText: string | undefined;
   setSuggestedText: (text: string | undefined) => void;
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
 };
 
 export const useSuggestionStore = createWithEqualityFn<SuggestionStore>(
@@ -26,6 +28,11 @@ export const useSuggestionStore = createWithEqualityFn<SuggestionStore>(
     setSuggestedText: (text: string | undefined) =>
       set((state) => {
         return { ...state, suggestedText: text };
+      }),
+    isLoading: false,
+    setIsLoading: (isLoading: boolean) =>
+      set((state) => {
+        return { ...state, isLoading };
       }),
   }),
   shallow

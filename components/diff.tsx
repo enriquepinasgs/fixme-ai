@@ -10,11 +10,13 @@ const Diff = ({
   string2 = "",
   showErrors = true,
   mode = "words",
+  classname,
 }: {
   string1: string;
   string2: string;
   showErrors: boolean;
   mode: string;
+  classname?: string;
 }) => {
   let groups = diff.diffWords(string1, string2);
   if (mode === "chars") groups = diff.diffChars(string1, string2);
@@ -59,7 +61,7 @@ const Diff = ({
     );
   });
 
-  return <span>{mappedNodes}</span>;
+  return <span className={classname}>{mappedNodes}</span>;
 };
 
 Diff.propTypes = {

@@ -5,8 +5,8 @@ import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { defaultOriginalText, defaultSuggestedText } from "@/lib/modes";
 import { cn } from "@/lib/utils";
 import { useSuggestionStore } from "@/store/suggestion-store";
-import { CheckIcon, ClipboardIcon } from "lucide-react";
-import { useState } from "react";
+import { CheckIcon, ClipboardIcon, Loader2 } from "lucide-react";
+import { Fragment, useState } from "react";
 import { toast } from "sonner";
 import { Label } from "./ui/label";
 import { Switch } from "./ui/switch";
@@ -14,10 +14,13 @@ import { Switch } from "./ui/switch";
 export default function FixedTextViewer({ classname }: { classname?: string }) {
   const [showErrors, setShowErrors] = useState(true);
   const [diffMode, setDiffMode] = useState<string>("words");
-  const { sentText, suggestedText } = useSuggestionStore((state) => ({
-    sentText: state.sentText,
-    suggestedText: state.suggestedText,
-  }));
+  const { sentText, suggestedText, isLoading } = useSuggestionStore(
+    (state) => ({
+      sentText: state.sentText,
+      suggestedText: state.suggestedText,
+      isLoading: state.isLoading,
+    })
+  );
 
   const { isCopied, copyToClipboard } = useCopyToClipboard();
   return (
@@ -28,13 +31,21 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
           toast.success("text copied to clipboard");
         }}
         className={cn(
-          "border rounded-md shadow-md px-6 py-4 overflow-auto max-h-96 group relative text-start h-full w-full flex bg-background"
+          "border rounded-md shadow-md  overflow-auto max-h-96 group relative text-start h-full w-full flex bg-background",
+          showErrors && !isLoading ? "hover:text-foreground/50" : ""
         )}
       >
+        {isLoading && (
+          <Fragment>
+            <Loader2 className="animate-spin absolute top-1/2 right-1/2 text-primary z-20" />
+            <div className="flex h-full w-full z-10 absolute bg-gray-200/50 dark:bg-gray-800/50"></div>
+          </Fragment>
+        )}
+
         {isCopied ? (
-          <CheckIcon className=" bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0" />
+          <CheckIcon className=" bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0 text-foreground" />
         ) : (
-          <ClipboardIcon className="bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0" />
+          <ClipboardIcon className="bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0 text-foreground" />
         )}
         <Diff
           string1={sentText && suggestedText ? sentText : defaultOriginalText}
@@ -43,6 +54,7 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
           }
           showErrors={showErrors}
           mode={diffMode}
+          classname="px-6 py-4"
         />
       </button>
       <div className="flex items-center justify-between">
