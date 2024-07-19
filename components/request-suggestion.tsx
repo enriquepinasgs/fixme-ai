@@ -13,6 +13,7 @@ import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import { CircleHelpIcon, SparklesIcon } from "lucide-react";
 import { useCallback, useState } from "react";
+import { toast } from "sonner";
 import { SelectMode } from "./select-mode";
 import { Button } from "./ui/button";
 
@@ -50,13 +51,19 @@ export default function RequestSuggestion({
     const generatedPrompt = getPromptForMode(selectedMode.name, originalText);
     const openai = createOpenAI({ apiKey: currentApiKey });
     setIsLoading(true);
-    const suggestedText = await generateText({
-      model: openai("gpt-4-turbo"),
-      prompt: generatedPrompt,
-    });
-    setIsLoading(false);
-    setSuggestedText(suggestedText.text);
-    setSentText(originalText);
+    try {
+      const suggestedText = await generateText({
+        model: openai("gpt-4-turbo"),
+        prompt: generatedPrompt,
+      });
+      setSuggestedText(suggestedText.text);
+      setSentText(originalText);
+      toast.success("Text generated successfully");
+    } catch {
+      toast.error("Ooops, something went wrong :(");
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <div className={cn("flex items-center gap-2", classname)}>
