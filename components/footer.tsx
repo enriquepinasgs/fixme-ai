@@ -5,7 +5,7 @@ export default function Footer({ classname }: { classname?: string }) {
   return (
     <footer
       className={cn(
-        "text-sm invisible md:visible text-foreground/50",
+        "text-xs invisible md:visible text-foreground/50",
         classname
       )}
     >

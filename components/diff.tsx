@@ -5,8 +5,19 @@ import PropTypes from "prop-types";
 import { Downlight } from "./ui/downlight";
 import { Highlight } from "./ui/highlight";
 
-const Diff = ({ string1 = "", string2 = "", showErrors = true }) => {
+const Diff = ({
+  string1 = "",
+  string2 = "",
+  showErrors = true,
+  mode = "words",
+}: {
+  string1: string;
+  string2: string;
+  showErrors: boolean;
+  mode: string;
+}) => {
   let groups = diff.diffWords(string1, string2);
+  if (mode === "chars") groups = diff.diffChars(string1, string2);
 
   const mappedNodes = groups.map((group, idx) => {
     const { value, added, removed } = group;
