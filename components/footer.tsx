@@ -3,8 +3,13 @@ import { LinkPreview } from "./ui/link-preview";
 
 export default function Footer({ classname }: { classname?: string }) {
   return (
-    <div className={cn("invisible md:visible text-foreground/50", classname)}>
-      <p>
+    <footer
+      className={cn(
+        "text-sm invisible md:visible text-foreground/50",
+        classname
+      )}
+    >
+      <span>
         Created by Enrique Pina. Credits to{" "}
         <LinkPreview
           url="https://ui.shadcn.com/"
@@ -19,8 +24,8 @@ export default function Footer({ classname }: { classname?: string }) {
         >
           Aceternity UI
         </LinkPreview>{" "}
-        for component design libraries.
-      </p>
-    </div>
+        for component design libraries
+      </span>
+    </footer>
   );
 }

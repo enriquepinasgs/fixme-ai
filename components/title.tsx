@@ -28,7 +28,7 @@ export default function Tittle({ classname }: { classname?: string }) {
       className={cn("flex flex-col items-center justify-center ", classname)}
     >
       <TypewriterEffect words={words} />
-      <p className="text-neutral-600 dark:text-neutral-200 text-base mt-8 max-w-2xl text-center">
+      <span className="text-neutral-600 dark:text-neutral-200 text-base mt-8 max-w-2xl text-center">
         FixMe.ai enhances your writing with grammar corrections, synonym
         suggestions, and style improvements using{" "}
         <LinkPreview
@@ -38,7 +38,7 @@ export default function Tittle({ classname }: { classname?: string }) {
           Vercel AI SDK
         </LinkPreview>
         . Enter your text and let FixMe.ai do the rest!
-      </p>
+      </span>
     </div>
   );
 }

@@ -23,9 +23,9 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
         )}
       >
         {isCopied ? (
-          <CheckIcon className=" bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100" />
+          <CheckIcon className=" bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0" />
         ) : (
-          <ClipboardIcon className="bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100" />
+          <ClipboardIcon className="bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0" />
         )}
         <Diff
           string1="Welcome to FixMe.ai! This is a very usefull tool that will help you to improve your writings. To use it, simply write or paste your text in the box on the left and choose one of the options from the toolbar below. The 'FixMe' option will sugest corrections and improvements in your text. The 'Funny' option will change the tone of your text to make it more funny. And the 'Angry' option will change the tone to make it more angry. Try different options to see how your text changes!"
@@ -36,10 +36,10 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
       <div className="flex items-center space-x-2">
         <Switch
           checked={showErrors}
-          id="airplane-mode"
+          id="show-changes"
           onClick={() => setShowErrors(!showErrors)}
         />
-        <Label htmlFor="airplane-mode">Show suggestions</Label>
+        <Label htmlFor="show-changes">Show changes</Label>
       </div>
     </div>
   );
