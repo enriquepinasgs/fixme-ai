@@ -1,6 +1,6 @@
 import FixedTextViewer from "@/components/fixed-text-viewer";
 import { OpenAIApiKey } from "@/components/openai-apikey-dialog";
-import RequestModeForm from "@/components/request-mode-form";
+import RequestSuggestion from "@/components/request-suggestion";
 import TextInput from "@/components/text-input";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import Tittle from "@/components/title";
@@ -17,7 +17,7 @@ export default function Home() {
         <TextInput classname="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" />
         <FixedTextViewer classname="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" />
       </div>
-      <RequestModeForm classname="fixed bottom-0 right-1/2  transform translate-x-1/2 -translate-y-1/2" />
+      <RequestSuggestion classname="fixed bottom-0 right-1/2  transform translate-x-1/2 -translate-y-1/2" />
     </main>
   );
 }

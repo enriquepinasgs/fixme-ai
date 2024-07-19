@@ -13,12 +13,29 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { modes } from "@/lib/modes";
+import { Mode, modes } from "@/lib/modes";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
-export function SelectMode({ classname }: { classname?: string }) {
+export function SelectMode({
+  classname,
+  onChange,
+}: {
+  classname?: string;
+  onChange: (mode: Mode | undefined) => void;
+}) {
+  const defaultMode = modes.find((m) => m.name === "FixMe");
+
+  useEffect(() => {
+    onChange(defaultMode);
+  }, [onChange, defaultMode]);
   return (
-    <Select defaultValue="fixme">
+    <Select
+      defaultValue={defaultMode?.name}
+      onValueChange={(value) => {
+        onChange(modes.find((m) => m.name === value));
+      }}
+    >
       <SelectTrigger className={cn("w-[180px]", classname)}>
         <SelectValue placeholder="Select a mode" />
       </SelectTrigger>
@@ -26,7 +43,7 @@ export function SelectMode({ classname }: { classname?: string }) {
         <SelectGroup>
           <SelectLabel>Modes</SelectLabel>
           {modes.map((mode) => (
-            <SelectItem key={mode.name} value={mode.name.toLowerCase()}>
+            <SelectItem key={mode.name} value={mode.name}>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>

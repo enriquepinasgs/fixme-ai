@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
 import { useApiKeyStore } from "@/store/apikey-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { KeyRoundIcon } from "lucide-react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -39,7 +38,6 @@ const apiKeyFormSchema = z.object({
 });
 
 export function OpenAIApiKey({ classname }: { classname?: string }) {
-  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof apiKeyFormSchema>>({
     resolver: zodResolver(apiKeyFormSchema),
     defaultValues: {
@@ -47,10 +45,14 @@ export function OpenAIApiKey({ classname }: { classname?: string }) {
     },
   });
 
-  const { currentApiKey, setApiKey } = useApiKeyStore((state) => ({
-    currentApiKey: state.apiKey,
-    setApiKey: state.setApiKey,
-  }));
+  const { currentApiKey, setApiKey, open, setOpen } = useApiKeyStore(
+    (state) => ({
+      currentApiKey: state.apiKey,
+      setApiKey: state.setApiKey,
+      open: state.modalIsOpen,
+      setOpen: state.setModalIsOpen,
+    })
+  );
 
   function onSubmit(values: z.infer<typeof apiKeyFormSchema>) {
     setApiKey(values.apiKey);
@@ -104,6 +106,7 @@ export function OpenAIApiKey({ classname }: { classname?: string }) {
                   <FormLabel>ApiKey</FormLabel>
                   <FormControl>
                     <Input
+                      type="password"
                       placeholder={
                         currentApiKey
                           ? obscureString(currentApiKey)

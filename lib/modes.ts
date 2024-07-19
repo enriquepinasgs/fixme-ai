@@ -1,5 +1,13 @@
-type Mode = {
-  name: string;
+export type Mode = {
+  name:
+    | "FixMe"
+    | "Formal"
+    | "Casual"
+    | "Funny"
+    | "Serious"
+    | "Positive"
+    | "Negative"
+    | "Simplify";
   description: string;
 };
 
@@ -44,3 +52,8 @@ export const modes: Mode[] = [
       "Simplifies the text, making it clearer and easier to understand.",
   },
 ];
+
+export const defaultOriginalText =
+  "Welcome to FixMe.ai! This is a very usefull tool that will help you to improve your writings. To use it, simply write or paste your text in the box on the left and choose one of the options from the toolbar below. The 'FixMe' option will sugest corrections and improvements in your text. The 'Funny' option will change the tone of your text to make it more funny. And the 'Angry' option will change the tone to make it more angry. Try different options to see how your text changes!";
+export const defaultSuggestedText =
+  "Welcome to FixMe.ai! This is a very useful tool that will help you improve your writing. To use it, simply write or paste your text in the box on the left and choose one of the options from the toolbar below. The 'FixMe' option will suggest corrections and improvements to your text. The 'Funny' option will change the tone of your text to make it funnier. And the 'Angry' option will change the tone to make it angrier. Try different options to see how your text changes!";
