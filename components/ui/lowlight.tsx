@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export const Downlight = ({
+export const Lowlight = ({
   children,
   className,
 }: {
@@ -10,7 +10,7 @@ export const Downlight = ({
   return (
     <span
       className={cn(
-        "font-medium line-through bg-red-100 text-red-700 dark:bg-red-700/[0.2] dark:text-red-500 px-1 py-0.5",
+        "font-medium line-through bg-rose-100 text-rose-700 dark:bg-rose-700/[0.2] dark:text-rose-500 px-1 py-0.5 border rounded-[6px] border-rose-300 dark:border-rose-600",
         className
       )}
     >

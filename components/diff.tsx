@@ -1,8 +1,8 @@
 "use client";
 import * as diff from "diff";
 import { AnimatePresence, motion } from "framer-motion";
-import { Downlight } from "./ui/downlight";
 import { Highlight } from "./ui/highlight";
+import { Lowlight } from "./ui/lowlight";
 
 const Diff = ({
   string1 = "",
@@ -49,7 +49,7 @@ const Diff = ({
               transition={{ ease: "easeIn" }}
               layout
             >
-              <Downlight>{value}</Downlight>
+              <Lowlight>{value}</Lowlight>
             </motion.span>
           )}
         </AnimatePresence>
