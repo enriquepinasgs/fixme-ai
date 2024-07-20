@@ -10,7 +10,7 @@ export default function Footer({ classname }: { classname?: string }) {
       )}
     >
       <span>
-        Created by Enrique Pina. Credits to{" "}
+        Created by Enrique Pina. UI components powered by{" "}
         <LinkPreview
           url="https://ui.shadcn.com/"
           isStatic={true}
@@ -28,7 +28,6 @@ export default function Footer({ classname }: { classname?: string }) {
         >
           Aceternity UI
         </LinkPreview>{" "}
-        for component design libraries
       </span>
     </footer>
   );
