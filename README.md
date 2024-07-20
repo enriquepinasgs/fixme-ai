@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FixMe.ai
+
+Welcome to **FixMe.ai**, an innovative tool designed to help you improve your writing. Whether you need to correct grammar, enhance your style, or adjust the tone, FixMe.ai has got you covered. This project was developed as part of the **Vercel and Midudev** hackathon using Next.js 14 and the Vercel AI SDK.
+
+## Features
+
+- **FixMe**: Corrects grammatical errors, suggests synonyms, and improves the overall style of your text.
+- **Formal**: Transforms your text into a more formal and professional tone.
+- **Casual**: Adjusts your text to have a more casual and friendly tone.
+- **Funny**: Adds humor and makes your text more entertaining.
+- **Serious**: Converts your text to have a more serious and somber tone.
+- **Positive**: Highlights positive aspects and uses encouraging language.
+- **Negative**: Emphasizes deficiencies and uses critical language.
+- **Simplify**: Simplifies complex text for better clarity and understanding.
 
 ## Getting Started
 
@@ -16,21 +29,31 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. **Input Text**: Write or paste your text in the input box on the left side of the screen.
+2. **Select Mode**: Choose one of the modes from the toolbar below the input box. Each mode adjusts your text in a different way:
+   - **FixMe**
+   - **Formal**
+   - **Casual**
+   - **Funny**
+   - **Serious**
+   - **Positive**
+   - **Negative**
+   - **Simplify**
+3. **API Key**: To use the tool, you need to enter a valid OpenAI API key. Click on the button with the key icon at the top left to open the dialog and paste your API key.
+4. **Submit**: Click the "Submit" button to process your text and view the results in the output box on the right.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Next.js 14**: A React framework for production.
+- **Vercel AI SDK**: Provides AI capabilities to enhance your application.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **Lucide Icons**: A library of beautiful, open-source icons.
 
-## Deploy on Vercel
+## Credits
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Developed by **Enrique Pina**.
+- UI components powered by **shadcn** and **aceternity**.
