@@ -6,6 +6,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FixMe",
+  description:
+    "FixMe.ai enhances your writing with grammar corrections, synonym suggestions, and style improvements using AI",
+};
 
 const fontSans = FontSans({
   subsets: ["latin"],

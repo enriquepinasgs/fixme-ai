@@ -1,5 +1,5 @@
 import FixedTextViewer from "@/components/fixed-text-viewer";
-import { OpenAIApiKey } from "@/components/openai-apikey-dialog";
+import { OpenAIApiKeyDialog } from "@/components/openai-apikey-dialog";
 import RequestSuggestion from "@/components/request-suggestion";
 import TextInput from "@/components/text-input";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -10,10 +10,10 @@ export default function Home() {
     <main className="relative flex flex-col space-y-16 h-screen overflow-auto">
       <div className="flex flex-col gap-2 absolute top-0 right-0 m-6">
         <ThemeSwitcher />
-        <OpenAIApiKey />
+        <OpenAIApiKeyDialog />
       </div>
       <Tittle classname="mt-24" />
-      <div className="flex flex-col items-center md:items-start md:flex-row md:justify-evenly h-full w-full gap-8 p-4 ">
+      <div className="flex flex-col items-center md:items-start md:flex-row md:justify-evenly h-full w-full gap-8 p-4 pb-32 ">
         <TextInput classname="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" />
         <FixedTextViewer classname="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl" />
       </div>

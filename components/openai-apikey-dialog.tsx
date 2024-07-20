@@ -37,7 +37,7 @@ const apiKeyFormSchema = z.object({
     }),
 });
 
-export function OpenAIApiKey({ classname }: { classname?: string }) {
+export function OpenAIApiKeyDialog({ classname }: { classname?: string }) {
   const form = useForm<z.infer<typeof apiKeyFormSchema>>({
     resolver: zodResolver(apiKeyFormSchema),
     defaultValues: {
