@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { useApiKeyStore } from "@/store/apikey-store";
 import { useSuggestionStore } from "@/store/suggestion-store";
 import { createOpenAI } from "@ai-sdk/openai";
-import { generateText } from "ai";
+import { streamText } from "ai";
 import { CircleHelpIcon, SparklesIcon } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
@@ -52,12 +52,17 @@ export default function RequestSuggestion({
     const openai = createOpenAI({ apiKey: currentApiKey });
     setIsLoading(true);
     try {
-      const suggestedText = await generateText({
+      const { textStream } = await streamText({
         model: openai("gpt-4-turbo"),
         prompt: generatedPrompt,
       });
-      setSuggestedText(suggestedText.text);
+      let suggestedText = "";
       setSentText(originalText);
+      for await (const textPart of textStream) {
+        suggestedText += textPart;
+        setSuggestedText(suggestedText);
+      }
+
       toast.success("Text generated successfully");
     } catch {
       toast.error("Ooops, something went wrong :(");

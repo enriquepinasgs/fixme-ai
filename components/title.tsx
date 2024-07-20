@@ -32,7 +32,9 @@ export default function Tittle({ classname }: { classname?: string }) {
         FixMe.ai enhances your writing with grammar corrections, synonym
         suggestions, and style improvements using{" "}
         <LinkPreview
-          url="https://sdk.vercel.ai/docs/introduction"
+          url="https://sdk.vercel.ai"
+          imageSrc="verce-ai-sdk.webp"
+          isStatic={true}
           className="font-bold"
         >
           Vercel AI SDK

@@ -13,6 +13,8 @@ export default function Footer({ classname }: { classname?: string }) {
         Created by Enrique Pina. Credits to{" "}
         <LinkPreview
           url="https://ui.shadcn.com/"
+          isStatic={true}
+          imageSrc="shadcn.webp"
           className="underline text-foreground/50"
         >
           Shadcn/UI
@@ -20,6 +22,8 @@ export default function Footer({ classname }: { classname?: string }) {
         and{" "}
         <LinkPreview
           url="https://ui.aceternity.com/"
+          isStatic={true}
+          imageSrc="aceternity.webp"
           className="underline text-foreground/50"
         >
           Aceternity UI
