@@ -43,7 +43,7 @@ export default function SignInForm() {
       { email: data.email, password: data.password },
       {
         onSuccess: () => {
-          router.push("/");
+          router.push("/app");
           toast.success("Logged in!");
         },
         onError: () => {

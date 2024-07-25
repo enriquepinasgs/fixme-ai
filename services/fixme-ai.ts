@@ -12,6 +12,10 @@ class FixMeService {
     const res = await axios.post("/api/auth/signup", { email, password });
     return res;
   }
+  async signOut() {
+    const res = await axios.post("/api/auth/signout");
+    return res;
+  }
 }
 
 const imageService = new FixMeService();

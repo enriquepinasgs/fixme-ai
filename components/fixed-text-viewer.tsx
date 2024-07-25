@@ -24,14 +24,14 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
 
   const { isCopied, copyToClipboard } = useCopyToClipboard();
   return (
-    <div className={cn("flex flex-col space-y-4 h-full w-full", classname)}>
+    <div className={cn("flex flex-col gap-2 h-full w-full ", classname)}>
       <button
         onClick={() => {
           copyToClipboard(suggestedText ?? defaultSuggestedText);
           toast.success("text copied to clipboard");
         }}
         className={cn(
-          "border rounded-md shadow-md  overflow-auto max-h-96 group relative text-start h-full w-full flex bg-background",
+          "overflow-auto group relative text-start h-full w-full flex bg-background",
           showErrors && !isLoading ? "hover:text-foreground/50" : "",
           isLoading ? "overflow-hidden" : ""
         )}
@@ -58,7 +58,7 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
           classname="px-6 py-4 whitespace-pre-line"
         />
       </button>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between h-16 ">
         <div className="flex items-center space-x-2">
           <Switch
             checked={showErrors}

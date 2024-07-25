@@ -1,10 +1,8 @@
 import "@/app/globals.css";
 import { Inter as FontSans } from "next/font/google";
 
-import Footer from "@/components/footer";
 import ReactQueryProvider from "@/components/react-query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
@@ -42,9 +40,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            <Footer classname="absolute bottom-0 right-0 mr-2" />
             <Toaster />
-            <BackgroundBeams />
           </ThemeProvider>
         </ReactQueryProvider>
       </body>

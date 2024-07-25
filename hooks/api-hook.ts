@@ -24,5 +24,11 @@ const useSignup = () => {
       fixmeService.signup({ email, password }),
   });
 };
+const useSignOut = () => {
+  return useMutation({
+    ...DEFAULT_QUERY_OPTIONS,
+    mutationFn: () => fixmeService.signOut(),
+  });
+};
 
-export { useSignin, useSignup };
+export { useSignin, useSignOut, useSignup };

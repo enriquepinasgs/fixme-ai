@@ -1,21 +1,26 @@
-"use client";
-import { AngryIcon, LaughIcon, SparklesIcon } from "lucide-react";
-import NavbarItem from "./navbar-item";
+import { createClient } from "@/lib/supabase/server";
+import { cn } from "@/lib/utils";
+import { redirect } from "next/navigation";
+import UserDropdown from "./user-dropdown";
 
-export default function Navbar() {
+export default async function Navbar({ classname }: { classname?: string }) {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) redirect("/signin");
   return (
-    <div className="flex border rounded-full fixed bottom-0 right-1/2  transform translate-x-1/2 -translate-y-1/2  backdrop-blur-sm bg-background hover:shadow-md transition-all">
-      <NavbarItem
-        name="FixMe"
-        icon={SparklesIcon}
-        iconClassName="text-amber-400"
-      />
-      <NavbarItem
-        name="Funny"
-        icon={LaughIcon}
-        iconClassName="text-green-500"
-      />
-      <NavbarItem name="Angry" icon={AngryIcon} iconClassName="text-red-500" />
-    </div>
+    <nav
+      className={cn(
+        "h-12 border-b flex w-full justify-center px-4 backdrop-blur-sm",
+        classname
+      )}
+    >
+      <div className="h-12 flex w-full items-center justify-between max-w-7xl">
+        <p>
+          <span className="font-bold text-xl">Fixme.</span>
+          <span className="text-primary font-bold text-xl">ai</span>
+        </p>
+        <UserDropdown user={data.user} />
+      </div>
+    </nav>
   );
 }
