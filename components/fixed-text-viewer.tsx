@@ -32,7 +32,8 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
         }}
         className={cn(
           "border rounded-md shadow-md  overflow-auto max-h-96 group relative text-start h-full w-full flex bg-background",
-          showErrors && !isLoading ? "hover:text-foreground/50" : ""
+          showErrors && !isLoading ? "hover:text-foreground/50" : "",
+          isLoading ? "overflow-hidden" : ""
         )}
       >
         {isLoading && (
