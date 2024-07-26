@@ -1,7 +1,7 @@
 import { SigninUser } from "@/app/api/auth/signin/route";
 import { FixMeInput } from "@/app/api/fixme/route";
 import fixmeService from "@/services/fixme-ai";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const DEFAULT_CACHED_TIME = 1000 * 15 * 60; //15 mins
 
@@ -39,5 +39,12 @@ const useFixText = () => {
       fixmeService.fixText({ text, mode }),
   });
 };
+const useGetTextsHistory = () => {
+  return useQuery({
+    queryKey: ["textsHistory"],
+    ...DEFAULT_QUERY_OPTIONS,
+    queryFn: () => fixmeService.getTextsHistory(),
+  });
+};
 
-export { useFixText, useSignin, useSignOut, useSignup };
+export { useFixText, useGetTextsHistory, useSignin, useSignOut, useSignup };

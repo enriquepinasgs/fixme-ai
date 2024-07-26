@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <div className="h-screen relative">
       <Navbar classname="absolute top-0 right-0 left-0" />
-      <div className="flex h-full w-full pt-12">
+      <div className="flex h-full w-full pt-12 ">
         <SideBar />
         {children}
       </div>

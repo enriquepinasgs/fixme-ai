@@ -15,15 +15,16 @@ model User {
   id        String   @id @db.Uuid
   email     String   @unique
   createdAt DateTime @default(now())
-  texts     text[]
+  texts     Text[]
 }
 
-model text {
-  id         Int     @id @default(autoincrement())
-  title      String
-  content    String?
-  published  Boolean @default(false)
-  created_by String  @db.Uuid
+model Text {
+  id        String   @id @db.Uuid
+  title     String?
+  original  String
+  suggested String
+  createdBy String   @db.Uuid
+  createdAt DateTime @default(now())
 
-  owner User @relation(fields: [created_by], references: [id])
+  owner User @relation(fields: [createdBy], references: [id])
 }

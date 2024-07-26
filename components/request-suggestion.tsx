@@ -9,6 +9,7 @@ import { Mode, modes } from "@/lib/modes";
 import { cn } from "@/lib/utils";
 import { useApiKeyStore } from "@/store/apikey-store";
 import { useSuggestionStore } from "@/store/suggestion-store";
+import { useQueryClient } from "@tanstack/react-query";
 import { CircleHelpIcon, SparklesIcon } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
@@ -41,7 +42,7 @@ export default function RequestSuggestion({
   }));
 
   const { mutate } = useFixText();
-
+  const queryClient = useQueryClient();
   async function submit() {
     if (selectedMode === undefined || originalText === undefined) return;
     setIsLoading(true);
@@ -53,6 +54,7 @@ export default function RequestSuggestion({
             setSentText(originalText);
             setSuggestedText(res.data.suggestedText);
             toast.success("Text generated successfully");
+            queryClient.invalidateQueries({ queryKey: ["textsHistory"] });
           } else toast.error("Oops, something went wrong :(");
         },
         onError: () => {

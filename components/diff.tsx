@@ -22,7 +22,6 @@ const Diff = ({
 
   const mappedNodes = groups.map((group, idx) => {
     const { value, added, removed } = group;
-    console.log(value);
     if (added && showErrors)
       return (
         <AnimatePresence key={idx} initial={false}>

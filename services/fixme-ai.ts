@@ -21,6 +21,10 @@ class FixMeService {
     const res = await axios.post("/api/fixme", { text, mode });
     return res;
   }
+  async getTextsHistory() {
+    const res = await axios.post("/api/texts");
+    return res;
+  }
 }
 
 const imageService = new FixMeService();
