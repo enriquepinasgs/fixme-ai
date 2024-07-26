@@ -46,5 +46,27 @@ const useGetTextsHistory = () => {
     queryFn: () => fixmeService.getTextsHistory(),
   });
 };
+const useGetTextById = (textId: string) => {
+  return useQuery({
+    queryKey: [`text:${textId}`],
+    ...DEFAULT_QUERY_OPTIONS,
+    queryFn: () => fixmeService.getTextsById(textId),
+  });
+};
+const useGetMe = () => {
+  return useQuery({
+    queryKey: ["me"],
+    ...DEFAULT_QUERY_OPTIONS,
+    queryFn: () => fixmeService.me(),
+  });
+};
 
-export { useFixText, useGetTextsHistory, useSignin, useSignOut, useSignup };
+export {
+  useFixText,
+  useGetMe,
+  useGetTextById,
+  useGetTextsHistory,
+  useSignin,
+  useSignOut,
+  useSignup,
+};

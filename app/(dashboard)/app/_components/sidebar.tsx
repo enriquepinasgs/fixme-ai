@@ -1,7 +1,7 @@
 "use client";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { useGetTextsHistory } from "@/hooks/api-hook";
-import { TextRow } from "@/lib/supabase";
+import { useGetMe, useGetTextsHistory } from "@/hooks/api-hook";
+import { TextRow } from "@/lib/supabase.types";
 import { cn } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -58,6 +58,11 @@ export default function SideBar() {
   const currentTextId = pathName.split("/")[3];
 
   const { data, isLoading, isError } = useGetTextsHistory();
+  const {
+    data: meData,
+    isLoading: meIsLoading,
+    isError: meIsError,
+  } = useGetMe();
   return (
     <div className="flex w-60 border-r p-4 bg-background flex-col justify-between overflow-hidden shrink-0">
       <div className="flex flex-col gap-12 overflow-auto">
@@ -78,7 +83,9 @@ export default function SideBar() {
           router
         )}
       </div>
-      <Button>Credits</Button>
+      <Button disabled={meIsLoading}>
+        Buy credits ({meData?.data.data.credits})
+      </Button>
     </div>
   );
 }

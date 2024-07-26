@@ -10,12 +10,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
   try {
-    const textIds = await supabase
-      .from("Text")
-      .select("id, createdAt, title, createdBy")
-      .filter("createdBy", "eq", authData.user.id)
-      .order("createdAt", { ascending: false });
-    return NextResponse.json(textIds);
+    const user = await supabase
+      .from("User")
+      .select("*")
+      .filter("id", "eq", authData.user.id)
+      .limit(1)
+      .single();
+    return NextResponse.json(user);
   } catch {
     return NextResponse.json({ error: "server error" }, { status: 500 });
   }

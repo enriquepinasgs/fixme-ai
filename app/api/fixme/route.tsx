@@ -1,6 +1,6 @@
 import { Mode } from "@/lib/modes";
 import { getPromptForMode } from "@/lib/prompts";
-import { Database } from "@/lib/supabase";
+import { Database } from "@/lib/supabase.types";
 import { createClient } from "@/lib/supabase/server";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";

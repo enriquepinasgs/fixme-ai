@@ -68,8 +68,8 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-md flex-col justify-center gap-4 bg-background border rounded-md p-4 shadow-md">
-      <h2 className="text-xl font-bold sm:text-2xl md:text-3xl">Sign in</h2>
+    <div className="mx-auto flex h-full w-full max-w-sm flex-col justify-center gap-4 bg-background border rounded-md p-4 shadow-md">
+      <h2 className="text-xl font-bold sm:text-2xl md:text-3xl">Sign up</h2>
       <Form {...form}>
         <form
           className="flex flex-col gap-4"

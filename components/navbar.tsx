@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import UserDropdown from "./user-dropdown";
 
@@ -14,10 +15,10 @@ export default async function Navbar({ classname }: { classname?: string }) {
         classname
       )}
     >
-      <p>
+      <Link href={"/app"}>
         <span className="font-bold text-xl">Fixme.</span>
         <span className="text-primary font-bold text-xl">ai</span>
-      </p>
+      </Link>
       <UserDropdown user={data.user} />
     </nav>
   );

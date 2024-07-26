@@ -8,7 +8,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="">
+    <main>
       <ResizablePanelGroup
         direction="horizontal"
         className="flex flex-col items-center md:items-start md:flex-row md:justify-evenly h-full w-full gap-4 p-4 "

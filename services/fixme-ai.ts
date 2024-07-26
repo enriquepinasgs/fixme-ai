@@ -22,7 +22,15 @@ class FixMeService {
     return res;
   }
   async getTextsHistory() {
-    const res = await axios.post("/api/texts");
+    const res = await axios.get("/api/texts");
+    return res;
+  }
+  async getTextsById(textId: string) {
+    const res = await axios.get(`/api/texts/${textId}`);
+    return res;
+  }
+  async me() {
+    const res = await axios.get("/api/me");
     return res;
   }
 }
