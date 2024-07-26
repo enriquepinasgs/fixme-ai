@@ -55,7 +55,7 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
           }
           showErrors={showErrors}
           mode={diffMode}
-          classname="px-6 py-4 whitespace-pre-line"
+          classname="px-6 py-2 text-pretty whitespace-pre-line"
         />
       </button>
       <div className="flex items-center justify-between h-16 ">

@@ -4,13 +4,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useFixText } from "@/hooks/api-hook";
 import { Mode, modes } from "@/lib/modes";
-import { getPromptForMode } from "@/lib/prompts";
 import { cn } from "@/lib/utils";
 import { useApiKeyStore } from "@/store/apikey-store";
 import { useSuggestionStore } from "@/store/suggestion-store";
-import { createOpenAI } from "@ai-sdk/openai";
-import { streamText } from "ai";
 import { CircleHelpIcon, SparklesIcon } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
@@ -42,33 +40,29 @@ export default function RequestSuggestion({
     currentApiKey: state.apiKey,
   }));
 
+  const { mutate } = useFixText();
+
   async function submit() {
     if (selectedMode === undefined || originalText === undefined) return;
-    if (currentApiKey === undefined) {
-      openApiKeyModal(true);
-      return;
-    }
-    const generatedPrompt = getPromptForMode(selectedMode.name, originalText);
-    const openai = createOpenAI({ apiKey: currentApiKey });
     setIsLoading(true);
-    try {
-      const { textStream } = await streamText({
-        model: openai("gpt-4-turbo"),
-        prompt: generatedPrompt,
-      });
-      let suggestedText = "";
-      setSentText(originalText);
-      for await (const textPart of textStream) {
-        suggestedText += textPart;
-        setSuggestedText(suggestedText);
+    mutate(
+      { mode: selectedMode, text: originalText },
+      {
+        onSuccess: (res) => {
+          if ("suggestedText" in res.data) {
+            setSentText(originalText);
+            setSuggestedText(res.data.suggestedText);
+            toast.success("Text generated successfully");
+          } else toast.error("Oops, something went wrong :(");
+        },
+        onError: () => {
+          toast.error("Oops, something went wrong :(");
+        },
+        onSettled: () => {
+          setIsLoading(false);
+        },
       }
-
-      toast.success("Text generated successfully");
-    } catch {
-      toast.error("Ooops, something went wrong :(");
-    } finally {
-      setIsLoading(false);
-    }
+    );
   }
   return (
     <div className={cn("flex items-center gap-2", classname)}>

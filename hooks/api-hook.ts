@@ -1,4 +1,5 @@
 import { SigninUser } from "@/app/api/auth/signin/route";
+import { FixMeInput } from "@/app/api/fixme/route";
 import fixmeService from "@/services/fixme-ai";
 import { useMutation } from "@tanstack/react-query";
 
@@ -31,4 +32,12 @@ const useSignOut = () => {
   });
 };
 
-export { useSignin, useSignOut, useSignup };
+const useFixText = () => {
+  return useMutation({
+    ...DEFAULT_QUERY_OPTIONS,
+    mutationFn: ({ text, mode }: FixMeInput) =>
+      fixmeService.fixText({ text, mode }),
+  });
+};
+
+export { useFixText, useSignin, useSignOut, useSignup };

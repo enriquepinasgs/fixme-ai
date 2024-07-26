@@ -10,9 +10,14 @@ export async function POST(request: NextRequest) {
   const user: SignupUser = await request.json();
   const supabase = createClient();
 
-  const { error, data } = await supabase.auth.signUp(user);
-
-  console.log(error);
+  const { error, data } = await supabase.auth.signUp({
+    ...user,
+    options: {
+      data: {
+        email: user.email,
+      },
+    },
+  });
 
   if (error) {
     return NextResponse.json({ error: "cannot signup user" }, { status: 500 });

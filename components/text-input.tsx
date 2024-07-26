@@ -19,9 +19,8 @@ export default function TextInput({ classname }: { classname?: string }) {
         disabled={isLoading}
         onChange={(value) => setOriginalText(value.target.value)}
         placeholder="Type or paste your text here to get suggestions."
-        className="h-full text-md border-none rounded-[2px] resize-none"
+        className="h-full text-md border-none rounded-[2px] resize-none text-pretty"
         id="input-text"
-        maxLength={3000}
       />
       <RequestSuggestion classname="justify-between h-16 " />
     </div>

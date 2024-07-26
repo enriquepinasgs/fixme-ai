@@ -10,17 +10,15 @@ export default async function Navbar({ classname }: { classname?: string }) {
   return (
     <nav
       className={cn(
-        "h-12 border-b flex w-full justify-center px-4 backdrop-blur-sm",
+        "h-12 border-b flex w-full px-4 backdrop-blur-sm items-center justify-between",
         classname
       )}
     >
-      <div className="h-12 flex w-full items-center justify-between max-w-7xl">
-        <p>
-          <span className="font-bold text-xl">Fixme.</span>
-          <span className="text-primary font-bold text-xl">ai</span>
-        </p>
-        <UserDropdown user={data.user} />
-      </div>
+      <p>
+        <span className="font-bold text-xl">Fixme.</span>
+        <span className="text-primary font-bold text-xl">ai</span>
+      </p>
+      <UserDropdown user={data.user} />
     </nav>
   );
 }

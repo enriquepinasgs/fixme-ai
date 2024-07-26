@@ -7,6 +7,7 @@ export default function LengthCount({ classname }: { classname?: string }) {
       {originalText === undefined || originalText.length === 0
         ? 0
         : originalText.trim().split(" ").length}
+      <span> words</span>
     </span>
   );
 }

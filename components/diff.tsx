@@ -22,6 +22,7 @@ const Diff = ({
 
   const mappedNodes = groups.map((group, idx) => {
     const { value, added, removed } = group;
+    console.log(value);
     if (added && showErrors)
       return (
         <AnimatePresence key={idx} initial={false}>
@@ -54,10 +55,10 @@ const Diff = ({
           )}
         </AnimatePresence>
       );
-    return <span key={idx}>{value}</span>;
+    return value;
   });
 
-  return <span className={classname}>{mappedNodes}</span>;
+  return <p className={classname}>{mappedNodes}</p>;
 };
 
 export default Diff;

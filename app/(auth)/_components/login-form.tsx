@@ -57,7 +57,7 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-xs flex-col justify-center gap-4 bg-background border rounded-md p-4 shadow-md">
+    <div className="mx-auto flex h-full w-full max-w-md flex-col justify-center gap-4 bg-background border rounded-md p-4 shadow-md">
       <h2 className="text-xl font-bold sm:text-2xl md:text-3xl">Sign in</h2>
       <Form {...form}>
         <form

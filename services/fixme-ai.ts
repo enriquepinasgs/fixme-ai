@@ -1,5 +1,6 @@
 import { SigninUser } from "@/app/api/auth/signin/route";
 import { SignupUser } from "@/app/api/auth/signup/route";
+import { FixMeInput } from "@/app/api/fixme/route";
 import axios from "axios";
 
 class FixMeService {
@@ -14,6 +15,10 @@ class FixMeService {
   }
   async signOut() {
     const res = await axios.post("/api/auth/signout");
+    return res;
+  }
+  async fixText({ text, mode }: FixMeInput) {
+    const res = await axios.post("/api/fixme", { text, mode });
     return res;
   }
 }

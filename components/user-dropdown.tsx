@@ -34,8 +34,8 @@ export default function UserDropdown({ user }: { user: User }) {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">Account</Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
+      <DropdownMenuContent className="w-56 mr-4">
+        <DropdownMenuLabel>{user.email?.split("@")[0]}</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={() => signOut()}>
