@@ -1,5 +1,4 @@
 "use client";
-import Diff from "@/components/diff";
 
 import {
   ResizableHandle,
@@ -9,8 +8,12 @@ import {
 import { useGetTextById } from "@/hooks/api-hook";
 import { TextRow } from "@/lib/supabase.types";
 import { FrownIcon, Loader2 } from "lucide-react";
+import { useState } from "react";
+import SuggestedText from "./_components/suggested-text";
 
 export default function TextPage({ params }: { params: { id: string } }) {
+  const [showErrors, setShowErrors] = useState(true);
+  const [diffMode, setDiffMode] = useState<string>("words");
   const { data, isLoading, isError } = useGetTextById(params.id);
   if (isLoading)
     return (
@@ -31,19 +34,16 @@ export default function TextPage({ params }: { params: { id: string } }) {
       <main className="p-4 w-full">
         <ResizablePanelGroup
           direction="horizontal"
-          className="flex flex-col items-center md:items-start md:flex-row md:justify-evenly h-full w-full gap-4 p-4 "
+          className="flex flex-col items-center md:items-start md:flex-row md:justify-evenly h-full w-full gap-4"
         >
-          <ResizablePanel defaultSize={50} minSize={25} className="h-full p-1">
+          <ResizablePanel defaultSize={50} minSize={25} className="h-full">
             <p className="whitespace-pre-line">{rawData.original}</p>
           </ResizablePanel>
           <ResizableHandle withHandle className="h-full" />
           <ResizablePanel defaultSize={50} minSize={25} className="h-full">
-            <Diff
-              string1={rawData.original}
-              string2={rawData.suggested}
-              classname="whitespace-pre-line overflow-auto"
-              showErrors={true}
-              mode="words"
+            <SuggestedText
+              originalText={rawData.original}
+              suggestedText={rawData.suggested}
             />
           </ResizablePanel>
         </ResizablePanelGroup>

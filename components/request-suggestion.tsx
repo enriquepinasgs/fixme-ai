@@ -7,7 +7,6 @@ import {
 import { useFixText } from "@/hooks/api-hook";
 import { Mode, modes } from "@/lib/modes";
 import { cn } from "@/lib/utils";
-import { useApiKeyStore } from "@/store/apikey-store";
 import { useSuggestionStore } from "@/store/suggestion-store";
 import { useQueryClient } from "@tanstack/react-query";
 import { CircleHelpIcon, SparklesIcon } from "lucide-react";
@@ -36,10 +35,6 @@ export default function RequestSuggestion({
     isLoading: state.isLoading,
     setIsLoading: state.setIsLoading,
   }));
-  const { openApiKeyModal, currentApiKey } = useApiKeyStore((state) => ({
-    openApiKeyModal: state.setModalIsOpen,
-    currentApiKey: state.apiKey,
-  }));
 
   const { mutate } = useFixText();
   const queryClient = useQueryClient();
@@ -55,9 +50,12 @@ export default function RequestSuggestion({
             setSuggestedText(res.data.suggestedText);
             toast.success("Text generated successfully");
             queryClient.invalidateQueries({ queryKey: ["textsHistory"] });
+            queryClient.invalidateQueries({ queryKey: ["me"] });
           } else toast.error("Oops, something went wrong :(");
         },
-        onError: () => {
+        onError: (error) => {
+          if (error.message.includes("422"))
+            toast.error("Insufficient balance");
           toast.error("Oops, something went wrong :(");
         },
         onSettled: () => {

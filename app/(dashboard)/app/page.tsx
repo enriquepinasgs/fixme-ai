@@ -8,16 +8,16 @@ import {
 
 export default function Home() {
   return (
-    <main>
+    <main className="w-full p-4">
       <ResizablePanelGroup
         direction="horizontal"
-        className="flex flex-col items-center md:items-start md:flex-row md:justify-evenly h-full w-full gap-4 p-4 "
+        className="flex flex-col items-center md:items-start md:flex-row md:justify-evenly h-full w-full gap-4 "
       >
-        <ResizablePanel defaultSize={50} minSize={25} className="h-full p-1">
+        <ResizablePanel defaultSize={50} minSize={25} className="h-full w-full">
           <TextInput classname="h-full" />
         </ResizablePanel>
         <ResizableHandle withHandle className="h-full" />
-        <ResizablePanel defaultSize={50} minSize={25} className="h-full">
+        <ResizablePanel defaultSize={50} minSize={25} className="h-full w-full">
           <FixedTextViewer classname="h-full" />
         </ResizablePanel>
       </ResizablePanelGroup>

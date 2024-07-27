@@ -4,7 +4,6 @@ import { useGetMe, useGetTextsHistory } from "@/hooks/api-hook";
 import { TextRow } from "@/lib/supabase.types";
 import { cn } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -12,8 +11,7 @@ function getComponent(
   data: TextRow[] | undefined,
   isLoading: boolean,
   isError: boolean,
-  currentTextId: string | null,
-  router: AppRouterInstance
+  currentTextId: string | null
 ) {
   if (isLoading) {
     let loadingButtons: number[] = Array.from({ length: 5 }, (_, i) => i + 1);
@@ -64,26 +62,25 @@ export default function SideBar() {
     isError: meIsError,
   } = useGetMe();
   return (
-    <div className="flex w-60 border-r p-4 bg-background flex-col justify-between overflow-hidden shrink-0">
+    <div className="flex w-60 border-r p-4 bg-background flex-col justify-between overflow-hidden shrink-0 gap-2">
       <div className="flex flex-col gap-12 overflow-auto">
-        <Button
-          onClick={() => {
-            router.push("/app");
-          }}
-          className="gap-2 text-start w-full justify-start"
-          variant={"ghost"}
+        <Link
+          href={"/app"}
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "gap-2 text-start w-full justify-start"
+          )}
         >
-          <PlusIcon className="h-[1.2rem] w-[1.2rem]" /> New text
-        </Button>
+          <PlusIcon className="h-5 w-5 " /> New text
+        </Link>
         {getComponent(
           data?.data.data as TextRow[],
           isLoading,
           isError,
-          currentTextId,
-          router
+          currentTextId
         )}
       </div>
-      <Button disabled={meIsLoading}>
+      <Button variant={"outline"} disabled={meIsLoading}>
         Buy credits ({meData?.data.data.credits})
       </Button>
     </div>
