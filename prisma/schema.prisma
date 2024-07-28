@@ -26,6 +26,7 @@ model Text {
   suggested String
   createdBy String   @db.Uuid
   createdAt DateTime @default(now())
+  deleted   Boolean  @default(false)
 
   owner User @relation(fields: [createdBy], references: [id])
 }

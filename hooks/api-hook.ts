@@ -1,4 +1,5 @@
 import { SigninUser } from "@/app/api/auth/signin/route";
+import { UpdatePassword } from "@/app/api/auth/update-password/route";
 import { FixMeInput } from "@/app/api/fixme/route";
 import fixmeService from "@/services/fixme-ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -29,6 +30,19 @@ const useSignOut = () => {
   return useMutation({
     ...DEFAULT_QUERY_OPTIONS,
     mutationFn: () => fixmeService.signOut(),
+  });
+};
+const useResetPassword = () => {
+  return useMutation({
+    ...DEFAULT_QUERY_OPTIONS,
+    mutationFn: (email: string) => fixmeService.resetPassword(email),
+  });
+};
+const useUpdatePassword = () => {
+  return useMutation({
+    ...DEFAULT_QUERY_OPTIONS,
+    mutationFn: (updatePassword: UpdatePassword) =>
+      fixmeService.updatePassword(updatePassword),
   });
 };
 
@@ -66,7 +80,9 @@ export {
   useGetMe,
   useGetTextById,
   useGetTextsHistory,
+  useResetPassword,
   useSignin,
   useSignOut,
   useSignup,
+  useUpdatePassword,
 };

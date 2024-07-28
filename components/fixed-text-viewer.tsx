@@ -2,7 +2,6 @@
 import Diff from "@/components/diff";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { defaultSuggestedText } from "@/lib/modes";
 import { cn } from "@/lib/utils";
 import { useSuggestionStore } from "@/store/suggestion-store";
 import { CheckIcon, ClipboardIcon, Loader2 } from "lucide-react";
@@ -41,8 +40,10 @@ export default function FixedTextViewer({ classname }: { classname?: string }) {
     <div className={cn("flex flex-col gap-2 h-full w-full ", classname)}>
       <button
         onClick={() => {
-          copyToClipboard(suggestedText ?? defaultSuggestedText);
-          toast.success("text copied to clipboard");
+          if (suggestedText && suggestedText.length > 0) {
+            copyToClipboard(suggestedText);
+            toast.success("text copied to clipboard");
+          }
         }}
         className={cn(
           "overflow-auto group relative text-start h-full w-full flex bg-background",

@@ -23,8 +23,10 @@ export default function SuggestedText({
     <div className="flex flex-col gap-2 h-full w-full justify-between">
       <button
         onClick={() => {
-          copyToClipboard(suggestedText ?? "");
-          toast.success("text copied to clipboard");
+          if (suggestedText.length > 0) {
+            copyToClipboard(suggestedText ?? "");
+            toast.success("text copied to clipboard");
+          }
         }}
         className={cn(
           "overflow-auto group relative text-start h-full w-full flex bg-background",
@@ -32,16 +34,16 @@ export default function SuggestedText({
         )}
       >
         {isCopied ? (
-          <CheckIcon className=" bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0 text-foreground" />
+          <CheckIcon className="absolute top-0 w-4 h-4 right-0 m-2 z-10 group-hover:opacity-100 opacity-0 text-foreground" />
         ) : (
-          <ClipboardIcon className="bg-background absolute top-0 w-4 h-4 right-0 m-4 group-hover:opacity-100 opacity-0 text-foreground" />
+          <ClipboardIcon className="absolute top-0 w-4 h-4 right-0 m-2 z-10 group-hover:opacity-100 opacity-0 text-foreground" />
         )}
         <Diff
           string1={originalText}
           string2={suggestedText}
           showErrors={showErrors}
           mode={diffMode}
-          classname="py-3 px-4 text-pretty whitespace-pre-line"
+          classname="px-4 text-pretty whitespace-pre-line"
         />
       </button>
       <div className="flex items-center justify-between h-16 ">

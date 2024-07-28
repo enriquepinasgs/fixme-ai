@@ -12,8 +12,9 @@ export async function GET(request: NextRequest) {
   try {
     const textIds = await supabase
       .from("Text")
-      .select("id, createdAt, title, createdBy")
+      .select("id, createdAt, title, createdBy, deleted")
       .filter("createdBy", "eq", authData.user.id)
+      .filter("deleted", "eq", false)
       .order("createdAt", { ascending: false });
     return NextResponse.json(textIds);
   } catch {

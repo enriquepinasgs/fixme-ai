@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
       original: data.text,
       suggested: text,
       title: data.text.slice(0, 50),
+      deleted: false,
       id: uuid(),
     };
     await supabase.from("Text").insert(newTextRow);

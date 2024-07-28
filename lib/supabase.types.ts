@@ -15,6 +15,7 @@ export type Database = {
         Row: {
           createdAt: string;
           createdBy: string;
+          deleted: boolean;
           id: string;
           original: string;
           suggested: string;
@@ -23,6 +24,7 @@ export type Database = {
         Insert: {
           createdAt?: string;
           createdBy: string;
+          deleted?: boolean;
           id: string;
           original: string;
           suggested: string;
@@ -31,6 +33,7 @@ export type Database = {
         Update: {
           createdAt?: string;
           createdBy?: string;
+          deleted?: boolean;
           id?: string;
           original?: string;
           suggested?: string;

@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { ThemeSwitcher } from "./theme-switcher";
 import UserDropdown from "./user-dropdown";
 
 export default async function Navbar({ classname }: { classname?: string }) {
@@ -19,7 +20,10 @@ export default async function Navbar({ classname }: { classname?: string }) {
         <span className="font-bold text-xl">Fixme.</span>
         <span className="text-primary font-bold text-xl">ai</span>
       </Link>
-      <UserDropdown user={data.user} />
+      <div className="flex">
+        <ThemeSwitcher />
+        <UserDropdown user={data.user} />
+      </div>
     </nav>
   );
 }

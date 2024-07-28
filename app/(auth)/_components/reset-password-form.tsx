@@ -9,47 +9,60 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSignin } from "@/hooks/api-hook";
+import { useUpdatePassword } from "@/hooks/api-hook";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { PasswordRecoveryDialog } from "./password-recovery-dialog";
 
-const LoginFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6).max(50),
-});
+const ResetPasswordSchema = z
+  .object({
+    password: z.string().min(8).max(50),
+    confirmPassword: z.string().min(8).max(50),
+  })
+  .refine(
+    (values) => {
+      return values.password === values.confirmPassword;
+    },
+    {
+      message: "Passwords must match!",
+      path: ["confirmPassword"],
+    }
+  );
 
-export default function SignInForm() {
+export default function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate } = useSignin();
+  const { mutate } = useUpdatePassword();
 
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof LoginFormSchema>>({
-    resolver: zodResolver(LoginFormSchema),
+  const searchParams = useSearchParams();
+
+  const form = useForm<z.infer<typeof ResetPasswordSchema>>({
+    resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
-      email: "",
       password: "",
     },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (!("code" in searchParams) || typeof searchParams.code !== "string") {
+      router.push("/error");
+      return;
+    }
     setIsLoading(true);
     mutate(
-      { email: data.email, password: data.password },
+      { newPassword: data.password, code: searchParams.code },
       {
         onSuccess: () => {
+          toast.success("Password updated successfully!");
           router.push("/app");
-          toast.success("Logged in!");
         },
         onError: () => {
-          toast.error("Invalid credentials");
+          toast.error("Ops! Something went wrong");
         },
         onSettled: () => {
           setIsLoading(false);
@@ -60,7 +73,7 @@ export default function SignInForm() {
 
   return (
     <div className="mx-auto flex h-full w-full max-w-sm flex-col justify-center gap-4 bg-background border rounded-md p-4 shadow-md">
-      <h2 className="text-xl font-bold sm:text-2xl md:text-3xl">Sign in</h2>
+      <h2 className="text-xl font-bold sm:text-2xl md:text-3xl">Sign up</h2>
       <Form {...form}>
         <form
           className="flex flex-col gap-4"
@@ -68,24 +81,10 @@ export default function SignInForm() {
         >
           <FormField
             control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="example@email.com" {...field} />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>New password</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder="pasword" {...field} />
                 </FormControl>
@@ -93,16 +92,26 @@ export default function SignInForm() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm password</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="confirm pasword"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Button type="submit" disabled={isLoading}>
-            Sign in
+            Reset password
           </Button>
-          <PasswordRecoveryDialog />
-          <p className="text-sm text-foreground/60">
-            Dont have an acount yet?{" "}
-            <Link href={"/signup"} className="underline text-primary">
-              Sign up here
-            </Link>
-          </p>
         </form>
       </Form>
     </div>

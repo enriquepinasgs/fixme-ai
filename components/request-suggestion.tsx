@@ -56,7 +56,7 @@ export default function RequestSuggestion({
         onError: (error) => {
           if (error.message.includes("422"))
             toast.error("Insufficient balance");
-          toast.error("Oops, something went wrong :(");
+          else toast.error("Oops, something went wrong :(");
         },
         onSettled: () => {
           setIsLoading(false);
