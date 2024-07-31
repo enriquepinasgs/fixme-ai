@@ -4,7 +4,7 @@ import { LinkPreview } from "@/components/ui/link-preview";
 import { cn } from "@/lib/utils";
 import { TypewriterEffect } from "./ui/typewriter-effect";
 
-export default function Tittle({ classname }: { classname?: string }) {
+export default function Title({ classname }: { classname?: string }) {
   const words = [
     {
       text: "Improve",
