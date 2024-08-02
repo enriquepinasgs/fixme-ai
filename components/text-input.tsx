@@ -17,7 +17,7 @@ export default function TextInput({ classname }: { classname?: string }) {
           disabled={isLoading}
           onChange={(value) => setOriginalText(value.target.value)}
           placeholder="Type or paste your text here to get suggestions."
-          className="h-96 max-h-96 shadow-md text-md"
+          className="h-96 max-h-96 shadow-md text-md resize-none"
           id="input-text"
           maxLength={3000}
         />
